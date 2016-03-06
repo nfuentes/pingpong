@@ -10,17 +10,23 @@ public class Jugador {
         
         @Id
         @GeneratedValue
+        private Long id;
         
         @Column
 	public String nombre;
+        
         @Column
 	public String apellido;
+        
         @Column
 	public int puntosFavor;
+        
         @Column
         public int puntosContra;
+        
         @Column
 	public int PartidosJugados;
+        
         @Column
 	public float Promedio;
         
