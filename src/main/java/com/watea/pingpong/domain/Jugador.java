@@ -1,12 +1,27 @@
 package com.watea.pingpong.domain;
 
-public class Jugador {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Jugador {
+        
+        @Id
+        @GeneratedValue
+        
+        @Column
 	public String nombre;
+        @Column
 	public String apellido;
+        @Column
 	public int puntosFavor;
+        @Column
         public int puntosContra;
+        @Column
 	public int PartidosJugados;
+        @Column
 	public float Promedio;
         
         public String getNombre() {
