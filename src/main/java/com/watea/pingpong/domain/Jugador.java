@@ -4,13 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.transaction.Transactional;
 
 @Entity
+
 public class Jugador {
         
         @Id
         @GeneratedValue
-        
+        public long id;
         @Column
 	public String nombre;
         @Column
@@ -91,5 +93,5 @@ public class Jugador {
         public void contarPartido(){
             this.setPartidosJugados(this.getPartidosJugados()+1);
         }
-	
+
 }
