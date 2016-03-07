@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.transaction.Transactional;
 
 @Entity
-
+@Transactional
 public class Jugador {
         
         @Id
