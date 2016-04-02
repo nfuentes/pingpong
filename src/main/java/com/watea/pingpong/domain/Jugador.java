@@ -1,5 +1,6 @@
 package com.watea.pingpong.domain;
 
+import com.watea.pingpong.stats.StatsPartido;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,9 @@ public class Jugador {
         
         @Column
 	public int PartidosJugados;
+        
+        @Column
+        public int PartidosGanados;
         
         @Column
 	public float Promedio;
@@ -94,10 +98,18 @@ public class Jugador {
 		this.setPuntosFavor(this.getPuntosFavor()+puntosFavor);
 		this.setPuntosContra(this.getPuntosContra()+puntosContra);
                 this.contarPartido();
+                if (puntosFavor>puntosContra){
+                    this.PartidosGanados+=1;
+                }
 	}
         
         public void contarPartido(){
             this.setPartidosJugados(this.getPartidosJugados()+1);
+        }
+        
+        public void updatePromedio(){
+            if (StatsPartido.getInstance().getCount()!=0)
+                this.setPromedio(this.PartidosGanados/StatsPartido.getInstance().getCount());
         }
 	
 }

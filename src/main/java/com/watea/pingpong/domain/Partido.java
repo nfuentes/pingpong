@@ -1,5 +1,6 @@
 package com.watea.pingpong.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +15,10 @@ public class Partido {
         @GeneratedValue
         private Long id;   
         
-        @ManyToOne
+        @ManyToOne (cascade = CascadeType.ALL)
         Jugador jugador1;
         
-        @ManyToOne
+        @ManyToOne (cascade = CascadeType.ALL)
         Jugador jugador2;
         
         @Column

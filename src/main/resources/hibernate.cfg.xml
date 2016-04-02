@@ -11,5 +11,6 @@
     <property name="hibernate.hbm2ddl.auto">create</property>
     <mapping class="com.watea.pingpong.domain.Jugador"/>
     <mapping class="com.watea.pingpong.domain.Partido"/>
+    <mapping class="com.watea.pingpong.stats.StatsPartido"/>
   </session-factory>
 </hibernate-configuration>

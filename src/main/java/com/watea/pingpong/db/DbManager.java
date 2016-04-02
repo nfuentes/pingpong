@@ -14,18 +14,18 @@ import org.hibernate.cfg.Configuration;
  */
 
 
-public class SessionManager {
+public class DbManager {
     
     SessionFactory session;
-    private static SessionManager instance=null;
+    private static DbManager instance=null;
     
-    protected SessionManager(){
+    protected DbManager(){
         
     }
     
-    public static SessionManager getInstance(){
+    public static DbManager getInstance(){
         if (instance==null)
-            instance=new SessionManager();
+            instance=new DbManager();
         return instance;
     }
     

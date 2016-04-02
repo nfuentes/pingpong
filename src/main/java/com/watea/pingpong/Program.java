@@ -5,9 +5,10 @@
  */
 package com.watea.pingpong;
 
-import com.watea.pingpong.db.SessionManager;
+import com.watea.pingpong.db.DbManager;
 import com.watea.pingpong.domain.Jugador;
 import com.watea.pingpong.domain.Partido;
+import com.watea.pingpong.stats.StatsPartido;
 
 /**
  *
@@ -16,30 +17,43 @@ import com.watea.pingpong.domain.Partido;
 public class Program {
     public static void main(String[] args){
 
-         SessionManager.getInstance().startSession();
+         DbManager.getInstance().startSession();
          Jugador jugador1 = new Jugador().nombre("Nicolas").apellido("Fuentes");
          Jugador jugador2 = new Jugador().nombre("Emiliano").apellido("Di Pierro");
          Partido partido=new Partido();
          partido.registrarDatos(jugador1, jugador2, 21, 19);
-         SessionManager.getInstance().saveOrUpdate(jugador1);
-         SessionManager.getInstance().saveOrUpdate(jugador2);
-         SessionManager.getInstance().saveOrUpdate(partido);
-
+         StatsPartido.getInstance().update();
+         jugador1.updatePromedio();
+         jugador2.updatePromedio();
+         DbManager.getInstance().saveOrUpdate(StatsPartido.getInstance());
+         DbManager.getInstance().saveOrUpdate(partido);    
+         DbManager.getInstance().saveOrUpdate(jugador1);
+         DbManager.getInstance().saveOrUpdate(jugador2);
+         
+         
+         
          System.out.println("El partido salio "+partido.getPuntosJ1()+" a "+partido.getPuntosJ2());
          System.out.println(partido.getJugador1().getNombre()+" hizo "+partido.getPuntosJ1()+" puntos");
          System.out.println(partido.getJugador2().getNombre()+" hizo "+partido.getPuntosJ2()+" puntos");
          System.out.println(partido.getJugador1().getNombre()+" jugo "+jugador1.getPartidosJugados()+" partidos");
          System.out.println(partido.getJugador2().getNombre()+" jugo "+jugador2.getPartidosJugados()+" partidos");
          Partido partido2=new Partido();
-         partido2.registrarDatos(jugador1, jugador2, 21, 10);
-         SessionManager.getInstance().saveOrUpdate(jugador1);
-         SessionManager.getInstance().saveOrUpdate(jugador2);
-         SessionManager.getInstance().saveOrUpdate(partido2);
+         partido2.registrarDatos(jugador1, jugador2, 10, 21);
+         StatsPartido.getInstance().update();
+         DbManager.getInstance().saveOrUpdate(StatsPartido.getInstance());
+         jugador1.updatePromedio();
+         jugador2.updatePromedio();
+         DbManager.getInstance().saveOrUpdate(partido2);
+         DbManager.getInstance().saveOrUpdate(jugador1);
+         DbManager.getInstance().saveOrUpdate(jugador2);
+         
+         
+        
          System.out.println("El partido salio "+partido.getPuntosJ1()+" a "+partido.getPuntosJ2());
          System.out.println(partido2.getJugador1().getNombre()+" hizo "+partido2.getPuntosJ1()+" puntos");
          System.out.println(partido2.getJugador2().getNombre()+" hizo "+partido2.getPuntosJ2()+" puntos");
          System.out.println(partido2.getJugador1().getNombre()+" jugo "+jugador1.getPartidosJugados()+" partidos");
          System.out.println(partido2.getJugador2().getNombre()+" jugo "+jugador2.getPartidosJugados()+" partidos");
-         SessionManager.getInstance().closeSession();
+         DbManager.getInstance().closeSession();
     }
 }
