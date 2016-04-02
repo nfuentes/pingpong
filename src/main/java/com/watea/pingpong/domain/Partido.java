@@ -6,13 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity 
 public class Partido {
+        
         @Id
         @GeneratedValue
-        private Long id;
+        private Long id;   
         
         @ManyToOne
         Jugador jugador1;
