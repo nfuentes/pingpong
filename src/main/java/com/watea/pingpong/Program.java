@@ -23,14 +23,10 @@ public class Program {
          Partido partido=new Partido();
          partido.registrarDatos(jugador1, jugador2, 21, 19);
          StatsPartido.getInstance().update();
-         jugador1.updatePromedio();
-         jugador2.updatePromedio();
          DbManager.getInstance().saveOrUpdate(StatsPartido.getInstance());
          DbManager.getInstance().saveOrUpdate(partido);    
          DbManager.getInstance().saveOrUpdate(jugador1);
          DbManager.getInstance().saveOrUpdate(jugador2);
-         
-         
          
          System.out.println("El partido salio "+partido.getPuntosJ1()+" a "+partido.getPuntosJ2());
          System.out.println(partido.getJugador1().getNombre()+" hizo "+partido.getPuntosJ1()+" puntos");
@@ -39,21 +35,20 @@ public class Program {
          System.out.println(partido.getJugador2().getNombre()+" jugo "+jugador2.getPartidosJugados()+" partidos");
          Partido partido2=new Partido();
          partido2.registrarDatos(jugador1, jugador2, 10, 21);
+         
          StatsPartido.getInstance().update();
          DbManager.getInstance().saveOrUpdate(StatsPartido.getInstance());
-         jugador1.updatePromedio();
-         jugador2.updatePromedio();
          DbManager.getInstance().saveOrUpdate(partido2);
          DbManager.getInstance().saveOrUpdate(jugador1);
          DbManager.getInstance().saveOrUpdate(jugador2);
-         
-         
-        
+
          System.out.println("El partido salio "+partido.getPuntosJ1()+" a "+partido.getPuntosJ2());
          System.out.println(partido2.getJugador1().getNombre()+" hizo "+partido2.getPuntosJ1()+" puntos");
          System.out.println(partido2.getJugador2().getNombre()+" hizo "+partido2.getPuntosJ2()+" puntos");
          System.out.println(partido2.getJugador1().getNombre()+" jugo "+jugador1.getPartidosJugados()+" partidos");
          System.out.println(partido2.getJugador2().getNombre()+" jugo "+jugador2.getPartidosJugados()+" partidos");
+         jugador1.updatePromedio();
+         jugador2.updatePromedio();
          DbManager.getInstance().closeSession();
     }
 }

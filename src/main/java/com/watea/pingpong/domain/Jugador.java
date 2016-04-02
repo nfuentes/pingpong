@@ -1,6 +1,8 @@
 package com.watea.pingpong.domain;
 
+import com.watea.pingpong.db.DbManager;
 import com.watea.pingpong.stats.StatsPartido;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 
-public class Jugador {
+public class Jugador implements Serializable {
         
         @Id
         @GeneratedValue
@@ -27,13 +29,13 @@ public class Jugador {
         public int puntosContra;
         
         @Column
-	public int PartidosJugados;
+	public int partidosJugados;
         
         @Column
-        public int PartidosGanados;
+        public int partidosGanados;
         
-        @Column
-	public float Promedio;
+        @Column (precision=10, scale=2)
+	public double Promedio;
         
         
         public String getNombre() {
@@ -69,18 +71,26 @@ public class Jugador {
         }
 
         public Integer getPartidosJugados() {
-            return PartidosJugados;
+            return partidosJugados;
         }
 
         public void setPartidosJugados(Integer PartidosJugados) {
-            this.PartidosJugados = PartidosJugados;
+            this.partidosJugados = PartidosJugados;
+        }
+        
+        public Integer getPartidosGanados() {
+            return partidosGanados;
         }
 
-        public float getPromedio() {
+        public void setPartidosGanados(Integer partidosGanados) {
+            this.partidosGanados = partidosGanados;
+        }
+
+        public double getPromedio() {
             return Promedio;
         }
 
-        public void setPromedio(float Promedio) {
+        public void setPromedio(double Promedio) {
             this.Promedio = Promedio;
         }
 
@@ -99,7 +109,7 @@ public class Jugador {
 		this.setPuntosContra(this.getPuntosContra()+puntosContra);
                 this.contarPartido();
                 if (puntosFavor>puntosContra){
-                    this.PartidosGanados+=1;
+                    this.partidosGanados+=1;
                 }
 	}
         
@@ -108,8 +118,9 @@ public class Jugador {
         }
         
         public void updatePromedio(){
-            if (StatsPartido.getInstance().getCount()!=0)
-                this.setPromedio(this.PartidosGanados/StatsPartido.getInstance().getCount());
-        }
-	
+            if (StatsPartido.getInstance().getCount()!=0){
+                this.setPromedio((double)this.partidosGanados/StatsPartido.getInstance().getCount());
+            }
+            DbManager.getInstance().saveOrUpdate(this);
+        }	
 }
