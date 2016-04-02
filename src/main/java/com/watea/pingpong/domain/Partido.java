@@ -1,8 +1,29 @@
 package com.watea.pingpong.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity 
 public class Partido {
-	Jugador jugador1, jugador2;
+        @Id
+        @GeneratedValue
+        private Long id;
+        
+        @ManyToOne
+        Jugador jugador1;
+        
+        @ManyToOne
+        Jugador jugador2;
+        
+        @Column
 	Integer puntosJ1;
+        
+        @Column
 	Integer puntosJ2;
         
 	public void registrarDatos(Jugador jugador1, Jugador jugador2, Integer puntosJ1, Integer puntosJ2) {
@@ -13,11 +34,13 @@ public class Partido {
 		this.jugador1.registrarPuntos(puntosJ1, puntosJ2);
 		this.jugador2.registrarPuntos(puntosJ2, puntosJ1);
 	}
-
+        
+        @ManyToMany
         public Jugador getJugador1() {
             return jugador1;
         }
-
+        
+        @ManyToMany
         public Jugador getJugador2() {
             return jugador2;
         }

@@ -24,11 +24,13 @@ public class Program {
          Jugador jugador2 = new Jugador().nombre("Emiliano").apellido("Di Pierro");
          Partido partido=new Partido();
          partido.registrarDatos(jugador1, jugador2, 21, 19);
-         //instance.getTransaction().begin();
-         
          session.getCurrentSession().getTransaction().begin();
-         session.getCurrentSession().save(jugador1);
-         session.getCurrentSession().save(jugador2);
+         session.getCurrentSession().saveOrUpdate(partido);
+         //instance.getTransaction().begin();
+                
+         //session.getCurrentSession().save(jugador1);
+         session.getCurrentSession().saveOrUpdate(jugador1);
+         session.getCurrentSession().saveOrUpdate(jugador2);
          session.getCurrentSession().getTransaction().commit();
          
          //instance.getTransaction().commit();
@@ -40,8 +42,9 @@ public class Program {
          Partido partido2=new Partido();
          partido2.registrarDatos(jugador1, jugador2, 21, 10);
          session.getCurrentSession().getTransaction().begin();
-         session.getCurrentSession().save(jugador1);
-         session.getCurrentSession().save(jugador2);
+         session.getCurrentSession().saveOrUpdate(partido2);
+         session.getCurrentSession().saveOrUpdate(jugador1);
+         session.getCurrentSession().saveOrUpdate(jugador2);
          session.getCurrentSession().getTransaction().commit();
          System.out.println("El partido salio "+partido.getPuntosJ1()+" a "+partido.getPuntosJ2());
          System.out.println(partido2.getJugador1().getNombre()+" hizo "+partido2.getPuntosJ1()+" puntos");

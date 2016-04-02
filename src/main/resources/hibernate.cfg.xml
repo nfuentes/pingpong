@@ -1,21 +1,15 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-
-    <session-factory>
-    
-    
-      <property name="javax.persistence.jdbc.url">jdbc:mysql://localhost:3306</property>
-      <property name="javax.persistence.jdbc.user">pingpong"</property>
-      <property name="javax.persistence.jdbc.driver">com.mysql.jdbc.Driver</property>
-      <property name="javax.persistence.jdbc.password">anik2580</property>
-      <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-      <property name="javax.persistence.schema-generation.database.action">drop-and-create</property>
-      <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-      <property name="hibernate.current_session_context_class">thread</property>
-   </session-factory>
-
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/pingpong?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">pingponguser</property>
+    <property name="hibernate.connection.password">nico25041410</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
+    <mapping class="com.watea.pingpong.domain.Jugador"/>
+    <mapping class="com.watea.pingpong.domain.Partido"/>
+  </session-factory>
 </hibernate-configuration>
