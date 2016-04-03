@@ -10,6 +10,10 @@ import com.watea.pingpong.domain.Jugador;
 import com.watea.pingpong.domain.Partido;
 import com.watea.pingpong.homes.JugadorHome;
 import com.watea.pingpong.stats.StatsPartido;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
 
 
 public class Program {
@@ -47,7 +51,11 @@ public class Program {
          System.out.println(partido2.getJugador2().getNombre()+" hizo "+partido2.getPuntosJ2()+" puntos");
          System.out.println(partido2.getJugador1().getNombre()+" jugo "+jugador1.getPartidosJugados()+" partidos");
          System.out.println(partido2.getJugador2().getNombre()+" jugo "+jugador2.getPartidosJugados()+" partidos");
-
+         
+         Jugador jugador3 = new Jugador().nombre("Nicolas");
+         DbManager.getInstance().getSession().getCurrentSession().getTransaction().begin();
+         List <Jugador> listaj = DbManager.getInstance().getSession().getCurrentSession().createCriteria(Jugador.class).add(Restrictions.like("nombre","Nicolas")) .list();
+         System.out.println(listaj.get(0).nombre);
          DbManager.getInstance().closeSession();
     }
 }

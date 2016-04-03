@@ -5,8 +5,10 @@
  */
 package com.watea.pingpong.db;
 
+import com.watea.pingpong.domain.Jugador;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
 
 /**
  *
@@ -17,6 +19,8 @@ import org.hibernate.cfg.Configuration;
 public class DbManager {
     
     SessionFactory session;
+
+    
     private static DbManager instance=null;
     
     protected DbManager(){
@@ -42,5 +46,14 @@ public class DbManager {
     
     public void closeSession(){
         session.close();
+        
+    }
+    
+    public SessionFactory getSession() {
+        return session;
+    }
+
+    public void setSession(SessionFactory session) {
+        this.session = session;
     }
 }
