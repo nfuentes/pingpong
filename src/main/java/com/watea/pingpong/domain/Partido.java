@@ -1,5 +1,6 @@
 package com.watea.pingpong.domain;
 
+import com.watea.pingpong.stats.StatsPartido;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class Partido {
 	Integer puntosJ2;
         
 	public void registrarDatos(Jugador jugador1, Jugador jugador2, Integer puntosJ1, Integer puntosJ2) {
+                StatsPartido.getInstance().update();
                 this.jugador1=jugador1;
 		this.jugador2=jugador2;
                 this.puntosJ1=puntosJ1;

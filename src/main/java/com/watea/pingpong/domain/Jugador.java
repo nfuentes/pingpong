@@ -1,6 +1,7 @@
 package com.watea.pingpong.domain;
 
 import com.watea.pingpong.db.DbManager;
+import com.watea.pingpong.homes.JugadorHome;
 import com.watea.pingpong.stats.StatsPartido;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -111,6 +112,7 @@ public class Jugador implements Serializable {
                 if (puntosFavor>puntosContra){
                     this.partidosGanados+=1;
                 }
+                this.updatePromedio();
 	}
         
         public void contarPartido(){
@@ -121,6 +123,6 @@ public class Jugador implements Serializable {
             if (StatsPartido.getInstance().getCount()!=0){
                 this.setPromedio((double)this.partidosGanados/StatsPartido.getInstance().getCount());
             }
-            DbManager.getInstance().saveOrUpdate(this);
+            JugadorHome.getInstance().saveUpdatePlayer(this);
         }	
 }
