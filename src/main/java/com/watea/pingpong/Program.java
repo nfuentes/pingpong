@@ -10,8 +10,9 @@ import com.watea.pingpong.domain.Jugador;
 import com.watea.pingpong.domain.Partido;
 import com.watea.pingpong.homes.JugadorHome;
 import com.watea.pingpong.stats.StatsPartido;
-import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
@@ -53,8 +54,9 @@ public class Program {
          System.out.println(partido2.getJugador2().getNombre()+" jugo "+jugador2.getPartidosJugados()+" partidos");
          
          Jugador jugador3 = new Jugador().nombre("Nicolas");
+         Example jugadorexample=Example.create(jugador3).excludeZeroes();
          DbManager.getInstance().getSession().getCurrentSession().getTransaction().begin();
-         List <Jugador> listaj = DbManager.getInstance().getSession().getCurrentSession().createCriteria(Jugador.class).add(Restrictions.like("nombre","Nicolas")) .list();
+         List <Jugador> listaj = DbManager.getInstance().getSession().getCurrentSession().createCriteria(Jugador.class).add(jugadorexample).list();      
          System.out.println(listaj.get(0).nombre);
          DbManager.getInstance().closeSession();
     }
